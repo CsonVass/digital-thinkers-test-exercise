@@ -9,7 +9,10 @@ namespace DAL
     {
         //Read
         public Task<IEnumerable<Driver>> GetDrivers();
+        public Task<Driver> GetDriverById(int id);
+        public Task<Driver> GetDriverByPlace(int place);
 
+             
         //Update
         public Task UpdatePalce(int driverId, int place);
     }

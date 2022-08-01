@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BL.DTO;
 using DAL;
 using DAL.Entities;
 using System;
@@ -18,10 +19,14 @@ namespace BL
         }
 
         //List
-        public async Task<IEnumerable<Driver>> ListDrivers()
+        public async Task<IEnumerable<DriverDTO>> ListDrivers()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Driver, DiverDTO>());
             var driverList = await formulaRepository.GetDrivers();
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Driver, DriverDTO>());
+            var mapper = new Mapper(config);
+
+            return mapper.Map<List<DriverDTO>>(driverList);
         }
 
         //Overtake

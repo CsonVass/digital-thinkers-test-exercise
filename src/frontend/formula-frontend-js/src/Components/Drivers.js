@@ -14,9 +14,12 @@ class Drivers extends React.Component {
     overTakeDriver(id){
         overTake(id).then(data => {         
             let newCards = this.state.cards;
-            newCards.find(d => d["id"] == data[0]["id"])["place"] = data[0]["place"]
-            newCards.find(d => d["id"] == data[1]["id"])["place"] = data[1]["place"]
+            newCards.find(d => d["id"] === data[0]["id"])["place"] = data[0]["place"]
+            newCards.find(d => d["id"] === data[1]["id"])["place"] = data[1]["place"]
             this.setState({cards: newCards})
+
+            console.log(`${data[0]["lastname"]} new place ${data[0]["place"]}`)
+            console.log(`${data[1]["lastname"]} new place ${data[1]["place"]}`)
         })
     }
    
@@ -32,6 +35,7 @@ class Drivers extends React.Component {
                 team={card_["team"]}
                 currentPlace={card_["place"]}
                 code={card_["code"]}
+                country={card_["country"]}
 
                 onClick={() => this.overTakeDriver(card_["id"])}
             />

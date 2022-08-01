@@ -14,6 +14,7 @@ import { getDrivers } from './Services/api';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 getDrivers().then(data => {
+  console.log("Data loading finished!")
 root.render(
   <React.StrictMode>
     <App 

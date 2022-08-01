@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,10 @@ namespace DAL.Entities
     public class Driver
     {
         [Key]
-        public int UniqueId { get; }
-        public int DriverId { get; set; }
+        [Column("Id")]
+        public int UniqueId { get; set; }
+        [Column("DriverId")]
+        public int Id { get; set; }
         public string Code { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

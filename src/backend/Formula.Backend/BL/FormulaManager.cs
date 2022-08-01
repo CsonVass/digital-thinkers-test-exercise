@@ -52,7 +52,7 @@ namespace BL
                 int driverOvertakenPlace = driverOvertaken.Place;
 
                 bool update1 = await formulaRepository.UpdatePalce(driverId, driverOvertakenPlace);
-                bool update2 = await formulaRepository.UpdatePalce(driverOvertaken.DriverId, driverPlace);
+                bool update2 = await formulaRepository.UpdatePalce(driverOvertaken.Id, driverPlace);
 
                 if(!update1 || !update2)
                 {

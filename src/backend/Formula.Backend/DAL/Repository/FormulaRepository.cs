@@ -31,7 +31,7 @@ namespace DAL.Repository
         {
             return await ctx
                          .Drivers
-                         .Where(d => d.DriverId == id)
+                         .Where(d => d.Id == id)
                          .FirstOrDefaultAsync();
         }
 

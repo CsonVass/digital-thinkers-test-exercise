@@ -42,6 +42,7 @@ namespace DAL
                 foreach (Driver d in drivers)
                 {
                     d.Place = places[i++];
+                    d.ImgUrl = $"/static/{d.Code.ToLower()}.png";
                     ctx.Drivers.Add(d);
                 }
                 ctx.SaveChanges();

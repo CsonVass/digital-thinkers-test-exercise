@@ -42,7 +42,7 @@ namespace API
                                     });
             });
 
-            services.AddDbContext<IFormulaContext, FormulaContext>(opt => opt.UseInMemoryDatabase("Formula"));
+            services.AddDbContext<IFormulaContext, FormulaContext>(o => o.UseInMemoryDatabase("Formula"));
 
             services.AddScoped<IFormulaRepository, FormulaRepository>();
 
@@ -77,7 +77,8 @@ namespace API
 
 
         }
+       
 
-      
+
     }
 }

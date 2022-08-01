@@ -14,6 +14,6 @@ namespace DAL
 
              
         //Update
-        public Task UpdatePalce(int driverId, int place);
+        public Task<bool> UpdatePalce(int driverId, int place);
     }
 }

@@ -38,17 +38,26 @@ namespace BL
                 TransactionScopeAsyncFlowOption.Enabled))
             {
                 var driver = await formulaRepository.GetDriverById(driverId);
+                if(driver == null)
+                {
+                    return false;
+                }
                 int driverPlace = driver.Place;
                 if(driverPlace == 1)
                 {
                     return false;
                 }
 
-                var driverOvertaken = await formulaRepository.GetDriverByPlace(driver.Place);
+                var driverOvertaken = await formulaRepository.GetDriverByPlace(driverPlace - 1);
                 int driverOvertakenPlace = driverOvertaken.Place;
 
-                await formulaRepository.UpdatePalce(driverId, driverOvertakenPlace);
-                await formulaRepository.UpdatePalce(driverOvertaken.DriverId, driverPlace);
+                bool update1 = await formulaRepository.UpdatePalce(driverId, driverOvertakenPlace);
+                bool update2 = await formulaRepository.UpdatePalce(driverOvertaken.DriverId, driverPlace);
+
+                if(!update1 || !update2)
+                {
+                    return false;
+                }
 
             }
             return true;

@@ -18,17 +18,6 @@ namespace DAL.Repository
         public FormulaRepository(IFormulaContext ctx)
         {
             this.ctx = ctx;
-            ReadData((FormulaContext) ctx);
-        }
-
-        public Task<Driver> GetDriverById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Driver> GetDriverByPlace(int place)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<Driver>> GetDrivers()
@@ -38,48 +27,43 @@ namespace DAL.Repository
                          .ToListAsync();
         }
 
-        public Task UpdatePalce(int driverId, int place)
+        public async Task<Driver> GetDriverById(int id)
         {
-            throw new NotImplementedException();
+            return await ctx
+                         .Drivers
+                         .Where(d => d.DriverId == id)
+                         .FirstOrDefaultAsync();
         }
 
-        //Reading data from given folder
-        private static void ReadData(FormulaContext ctx)
+        public async Task<Driver> GetDriverByPlace(int place)
         {
-            string dir = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "res\\formula1\\drivers.json");
-            using (StreamReader r = new StreamReader(dir))
+            return await ctx
+                         .Drivers
+                         .Where(d => d.Place == place)
+                         .FirstOrDefaultAsync();
+        }
+
+
+        public async Task<bool> UpdatePalce(int driverId, int place)
+        {
+            Driver driver = await GetDriverById(driverId);
+            if(driver == null)
             {
-                string json = r.ReadToEnd();
-                List<Driver> drivers = JsonConvert.DeserializeObject<List<Driver>>(json);
-
-                List<int> places = Enumerable.Range(1, drivers.Count).ToList();
-
-                places = Shuffle(places);
-                int i = 0;
-                foreach (Driver d in drivers)
-                {
-                    d.Place = places[i++];
-                    ctx.Drivers.Add(d);
-                }
-                ctx.SaveChanges();
+                return false;
             }
+
+            driver.Place = place;
+
+            var updateInfo = ctx.Drivers.Update(driver).State;
+
+            ((FormulaContext) ctx).SaveChanges();
+
+            return updateInfo == EntityState.Modified;
         }
 
-        //helper method for shuffling the places
-        private static Random rng = new Random();
-        public static List<int> Shuffle(List<int> list)
-        {
-            int n = list.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = rng.Next(n + 1);
-                int value = list[k];
-                list[k] = list[n];
-                list[n] = value;
-            }
-            return list;
-        }
+
+
+       
     }
 
 }

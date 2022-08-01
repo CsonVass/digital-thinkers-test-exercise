@@ -29,7 +29,7 @@ namespace DAL
         //Reading data from given folder
         private static void ReadData(FormulaContext ctx)
         {
-            string dir = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "res\\formula1\\drivers.json");
+            string dir = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "API\\Static\\drivers.json");
             using (StreamReader r = new StreamReader(dir))
             {
                 string json = r.ReadToEnd();

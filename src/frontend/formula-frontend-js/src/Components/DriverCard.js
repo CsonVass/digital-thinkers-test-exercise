@@ -18,9 +18,12 @@ export class DriverCard extends React.Component {
           </Card.Text> 
           <Card.Text> 
             Code: {this.props.code}
-          </Card.Text>          
-          <Button variant="primary" onClick={this.props.onClick} disabled={this.props.currentPlace===1}>Overtake</Button>
-        </Card.Body>       
+          </Card.Text>   
+        </Card.Body>   
+        <Card.Footer>
+        <Button variant="primary" onClick={this.props.onClick} disabled={this.props.currentPlace===1}>Overtake</Button>       
+
+          </Card.Footer>    
       </Card>
     )
   }

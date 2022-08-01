@@ -11,7 +11,7 @@ class Drivers extends React.Component {
     }
 
    
-  render(){
+  render(){   
 
     let driverCards = []
 
@@ -26,6 +26,10 @@ class Drivers extends React.Component {
             />
         )
     });
+
+    driverCards = driverCards.sort((a,b) => a.props["currentPlace"] - b.props["currentPlace"])
+
+
     
   return (
     <Container className='table table-striped'>

@@ -10,7 +10,7 @@ export class DriverCard extends React.Component {
   render() {
     return (
         <Card className='card text-center' style={{ width: '18rem'}}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+        <Card.Img variant="top" src={`https://localhost:5001/static/${this.props.code}.png`} />
         <Card.Body>
           <Card.Title>{this.props.name}</Card.Title>
           <Card.Text>             

@@ -10,11 +10,9 @@ export function getDrivers(){
     }
 }
 
-export function overTake(id){   
+export function overTake(id, places = 1){   
     try{
-    const promise = axios.put(`https://localhost:5001/api/drivers/${id}/overtake`, {
-
-      });
+    const promise = axios.put(`https://localhost:5001/api/drivers/${id}/overtake`);
       const dataPromise = promise.then((respone) => respone.data)  
     return dataPromise; 
     }catch(error) {

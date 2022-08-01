@@ -30,7 +30,7 @@ namespace BL
         }
 
         //Overtake
-        public async Task<IEnumerable<DriverDTO>> Overtake(int driverId, int places = 1)
+        public async Task<IEnumerable<DriverDTO>> Overtake(int driverId)
         {
             List<Driver> drivers = new List<Driver>();
             using (var tran = new TransactionScope(
@@ -44,12 +44,12 @@ namespace BL
                     return null;
                 }
                 int driverPlace = driver.Place;
-                if(driverPlace - places <= 0)
+                if(driverPlace - 1 <= 0)
                 {
                     return null;
                 }
 
-                var driverOvertaken = await formulaRepository.GetDriverByPlace(driverPlace - places);
+                var driverOvertaken = await formulaRepository.GetDriverByPlace(driverPlace - 1);
                 int driverOvertakenPlace = driverOvertaken.Place;
 
                 bool update1 = await formulaRepository.UpdatePalce(driverId, driverOvertakenPlace);

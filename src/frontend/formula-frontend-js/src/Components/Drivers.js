@@ -49,7 +49,6 @@ class Drivers extends React.Component {
   return (
     <Container className='table table-striped'>
         <Row>
-
         {driverCards}
         </Row>
     </Container>

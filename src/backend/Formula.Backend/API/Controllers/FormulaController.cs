@@ -14,13 +14,36 @@ public class FormulaController : ControllerBase
     public FormulaController(FormulaManager formulaManager) => this.formulaManager = formulaManager;
 
     [HttpGet("/drivers")]
-    public async Task<ActionResult<List<DriverDTO>>> GetDrivers(){
+    [ProducesResponseType(typeof(List<DriverDTO>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<List<DriverDTO>>> GetDrivers()
+    {
+        List<DriverDTO> drivers = new List<DriverDTO>(await formulaManager.ListDrivers());
 
+        if(drivers == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return Ok(drivers);
+        }
     }
 
 
-    [HttpPost("/drivers/{driverId}/overtake")]
-    public async Task<ActionResult<bool>> Overtake([FromRoute] int driverId) {
+    [HttpPut("/drivers/{driverId}/overtake")]
+    public async Task<ActionResult> Overtake([FromRoute] int driverId)
+    {
+        bool result = await formulaManager.Overtake(driverId);
+
+        if (result)
+        {
+            return Ok();
+        }
+        else
+        {
+            return Conflict();
+        }
+        
     }
 
 }

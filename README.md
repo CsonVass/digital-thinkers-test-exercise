@@ -13,10 +13,10 @@ If the backend is still not working, open it in Visual Studio and build and run 
 > **Note**: If you run the backend from vs, you might need to change `API\\Static\\drivers.json` to `src\\backend\\Formula.Backend\\API\\Static\\drivers.json` in line 32 of FormulaContext.cs
 
 # Solved tasks
-* all backend requirements implemented in ASP.NET (instead of Node.js and Express as discussed)
-* all frontend requirements (in simple JavaScript due to lack of TypeScript experience in React)
-* build and run without errors
-* frequent commits
+* All backend requirements implemented in ASP.NET (instead of Node.js and Express as discussed)
+* All frontend requirements (in simple JavaScript due to lack of TypeScript experience in React)
+* Build and run without errors
+* Frequent commits
 * Logging data status to frontend console
 * Styling with React Bootstrap
 * Extra feature: Flag of driver's home country

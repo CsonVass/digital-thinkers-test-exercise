@@ -1,6 +1,7 @@
 import React from 'react';
 import DriverCard from './DriverCard';
-import {Container, Row} from 'react-bootstrap'
+import {Container, Row} from 'react-bootstrap';
+import {overTake} from '../Services/api';
 
 
 class Drivers extends React.Component {
@@ -10,6 +11,14 @@ class Drivers extends React.Component {
         this.state = {cards: props.drivers}
     }
 
+    overTakeDriver(id){
+        overTake(id).then(data => {         
+            let newCards = this.state.cards;
+            newCards.find(d => d["id"] == data[0]["id"])["place"] = data[0]["place"]
+            newCards.find(d => d["id"] == data[1]["id"])["place"] = data[1]["place"]
+            this.setState({cards: newCards})
+        })
+    }
    
   render(){   
 
@@ -23,6 +32,8 @@ class Drivers extends React.Component {
                 team={card_["team"]}
                 currentPlace={card_["place"]}
                 code={card_["code"]}
+
+                onClick={() => this.overTakeDriver(card_["id"])}
             />
         )
     });

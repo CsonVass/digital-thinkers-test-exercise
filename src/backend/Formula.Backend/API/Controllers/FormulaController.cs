@@ -31,13 +31,13 @@ public class FormulaController : ControllerBase
 
 
     [HttpPut("drivers/{driverId}/overtake")]
-    public async Task<ActionResult> Overtake([FromRoute] int driverId)
+    public async Task<ActionResult<List<DriverDTO>>> Overtake([FromRoute] int driverId)
     {
-        bool result = await formulaManager.Overtake(driverId);
+        List<DriverDTO> result = new List<DriverDTO>(await formulaManager.Overtake(driverId));
 
-        if (result)
+        if (result != null)
         {
-            return Ok();
+            return Ok(result);
         }
         else
         {

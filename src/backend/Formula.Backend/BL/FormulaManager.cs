@@ -30,8 +30,9 @@ namespace BL
         }
 
         //Overtake
-        public async Task<bool> Overtake(int driverId)
+        public async Task<IEnumerable<DriverDTO>> Overtake(int driverId)
         {
+            List<Driver> drivers = new List<Driver>();
             using (var tran = new TransactionScope(
                 TransactionScopeOption.Required,
                 new TransactionOptions() { IsolationLevel = IsolationLevel.RepeatableRead },
@@ -40,12 +41,12 @@ namespace BL
                 var driver = await formulaRepository.GetDriverById(driverId);
                 if(driver == null)
                 {
-                    return false;
+                    return null;
                 }
                 int driverPlace = driver.Place;
                 if(driverPlace == 1)
                 {
-                    return false;
+                    return null;
                 }
 
                 var driverOvertaken = await formulaRepository.GetDriverByPlace(driverPlace - 1);
@@ -56,11 +57,17 @@ namespace BL
 
                 if(!update1 || !update2)
                 {
-                    return false;
+                    return null;
                 }
 
+                drivers.Add(driver);
+                drivers.Add(driverOvertaken);
+
             }
-            return true;
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Driver, DriverDTO>());
+            var mapper = new Mapper(config);
+
+            return mapper.Map<List<DriverDTO>>(drivers);
         }
 
         

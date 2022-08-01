@@ -22,7 +22,7 @@ export class DriverCard extends React.Component {
           <Card.Text> 
             Code: {this.props.code}
           </Card.Text>
-          <Button variant="primary">Overtake</Button>
+          <Button variant="primary" onClick={this.props.onClick} disabled={this.props.currentPlace==1}>Overtake</Button>
         </Card.Body>
       </Card>
     )

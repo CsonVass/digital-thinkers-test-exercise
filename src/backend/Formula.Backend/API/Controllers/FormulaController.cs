@@ -31,9 +31,9 @@ public class FormulaController : ControllerBase
 
 
     [HttpPut("drivers/{driverId}/overtake")]
-    public async Task<ActionResult<List<DriverDTO>>> Overtake([FromRoute] int driverId)
+    public async Task<ActionResult<List<DriverDTO>>> Overtake([FromRoute] int driverId, [FromBody] int places = 1)
     {
-        List<DriverDTO> result = new List<DriverDTO>(await formulaManager.Overtake(driverId));
+        List<DriverDTO> result = new List<DriverDTO>(await formulaManager.Overtake(driverId, places));
 
         if (result != null)
         {

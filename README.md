@@ -4,9 +4,9 @@ This is a fullstack web application displaying and mutating information about Fo
 Author: **Csongor Vass**
 
 # Build 
-On Windows you can simply run the program by executing the `RunBackend.exe` and *then* the `RunFrontend.cmd` files. If both finished building, you can go to `localhost:3000/drivers` and use the program. 
+On Windows you can simply run the program by executing the `RunBackend.exe` and *then* the `FirstRunFrontend.cmd` files. If both finished building, you can go to `localhost:3000/drivers` and use the program. Later you can use the `RunFrontend.cmd` as well.
 
-If you are using Linux or the shortcuts don't work, go to `src\backend\Formula.Backend\API\bin\Release\net5.0` and run `API.exe`, then go to `src\frontend\formula-frontend-js` and run `npm start` command.
+If you are using Linux or the shortcuts don't work, go to `src\backend\Formula.Backend\API\bin\Release\net5.0` and run `API.exe`, then go to `src\frontend\formula-frontend-js` and run the `npm install` then `npm start` commands.
 
 If the backend is still not working, open it in Visual Studio and build and run the API project. 
 
